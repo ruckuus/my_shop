@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // This will cause any child widget that subscribe to the listener will
     // get notified whenever there's any changes to the data in the provider.
-    return ChangeNotifierProvider(
-      builder: (context) => Products(),
+    return ChangeNotifierProvider.value(
+      value: Products(),
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
