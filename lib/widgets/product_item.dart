@@ -15,7 +15,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     // Don't need data passed via constructor, since it is now available
     // from provider.
-    final product = Provider.of<Product>(context);
+    final product = Provider.of<Product>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.zero,
       child: GridTile(
@@ -31,9 +31,11 @@ class ProductItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           leading: IconButton(
-            icon: Icon(
-              product.isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: Theme.of(context).accentColor,
+            icon: Consumer<Product>(
+              builder: (ctx, product, _) => Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: Theme.of(context).accentColor,
+              ),
             ),
             onPressed: () {
               product.toggleFavoriteStatus();
