@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../models/product.dart';
+import './product.dart';
 
 // `with` is mixins, light inheritance
 class Products with ChangeNotifier {
