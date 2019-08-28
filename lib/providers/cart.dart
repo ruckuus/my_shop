@@ -23,22 +23,41 @@ class Cart with ChangeNotifier {
     return _items == null ? 0 : _items.length;
   }
 
+  double get totalAmount {
+    double total = 0.0;
+    _items.forEach((key, cartItem) {
+//      print('key: ' + key);
+//      print('cartItem: ' + cartItem.id);
+//      print('cartItem: ' + cartItem.title);
+//      print('cartItem: ' + cartItem.quantity.toString());
+//      print('cartItem: ' + cartItem.price.toString());
+      total += cartItem.price * cartItem.quantity;
+    });
+    return total;
+  }
+
   void addItem(String productId, double price, String title) {
     if (_items.containsKey(productId)) {
-      _items.update(
-          productId,
-          (existingCartItem) => CartItem(
-              id: existingCartItem.id,
-              title: existingCartItem.title,
-              quantity: existingCartItem.quantity + 1));
+      _items.update(productId, (existingCartItem) {
+        int updatedQuantity = existingCartItem.quantity + 1;
+//        print('Updating item into cart: ' + productId);
+//        print('Updating item into cart: ' + existingCartItem.id);
+//        print('Updating item into cart: ' + updatedQuantity.toString());
+        return CartItem(
+            id: existingCartItem.id,
+            title: existingCartItem.title,
+            price: existingCartItem.price,
+            quantity: updatedQuantity);
+      });
     } else {
-      _items.putIfAbsent(
-          productId,
-          () => CartItem(
-              id: DateTime.now().toString(),
-              title: title,
-              price: price,
-              quantity: 1));
+      _items.putIfAbsent(productId, () {
+//        print('Adding item into cart: ' + productId);
+        return CartItem(
+            id: DateTime.now().toString(),
+            title: title,
+            price: price,
+            quantity: 1);
+      });
     }
     notifyListeners();
   }
