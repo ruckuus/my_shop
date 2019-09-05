@@ -16,7 +16,31 @@ class ProductDetailScreen extends StatelessWidget {
         title: Text(foundProduct.title),
       ),
       body: Container(
-        child: Text(foundProduct.id),
+        padding: EdgeInsets.all(8),
+        child: Card(
+          margin: EdgeInsets.all(5),
+          child: Column(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.network(
+                  foundProduct.imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Text(
+                foundProduct.title,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text('\$${foundProduct.price}'),
+              Text(
+                foundProduct.description,
+                style: TextStyle(fontSize: 10),
+                textAlign: TextAlign.start,
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
