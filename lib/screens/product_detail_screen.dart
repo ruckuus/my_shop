@@ -37,6 +37,7 @@ class ProductDetailScreen extends StatelessWidget {
                 foundProduct.description,
                 style: TextStyle(fontSize: 10),
                 textAlign: TextAlign.start,
+                softWrap: true,
               )
             ],
           ),
