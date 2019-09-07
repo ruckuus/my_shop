@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_shop/widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/orders.dart' show Orders;
@@ -19,6 +20,7 @@ class OrdersScreen extends StatelessWidget {
         ),
         itemCount: ordersData.orders.length,
       ),
+      drawer: AppDrawer(),
     );
   }
 }
